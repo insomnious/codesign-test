@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     env:
-      JEKYLL_PAT: ${{ secrets.GH_TOKEN }}
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
     runs-on: windows-latest
 
