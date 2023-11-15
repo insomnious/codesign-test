@@ -6,28 +6,9 @@ name: Node.js CI
 on:
   workflow_dispatch:
     inputs:
-        version:
-          description: "The version to release (eg: 'v1.0.0')"
-          required: true
-          type: string
-        build-artifact:
-          description: "Create artifact?"
-          required: true
-          type: boolean
-          default: true
         sign:
           description: "Code sign package?"
           required: true
-          type: boolean
-          default: true
-        draft:
-          description: "Create a draft release? (not used)"
-          required: false
-          type: boolean
-          default: true
-        prerelease:
-          description: "Create a prerelease? (not used)"
-          required: false
           type: boolean
           default: true
 
