@@ -1,5 +1,6 @@
 Set-StrictMode -Version 'Latest'
 $ErrorActionPreference = "Stop"
+$ProgressPreference = 'SilentlyContinue' #'Continue'
         
 $rootDir = Resolve-Path "."
 $downloadUrl = "https://www.ssl.com/download/codesigntool-for-windows/"
