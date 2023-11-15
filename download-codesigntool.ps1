@@ -47,7 +47,7 @@ If ($folderCount -eq 1) {
  
 $codeSignToolPropertiesFile = Join-Path $extractFolder $configPath
 
-New-Item -Path $codeSignToolPropertiesFile -ItemType File -Force
+$null = New-Item -Path $codeSignToolPropertiesFile -ItemType File -Force
 Add-Content -Path $codeSignToolPropertiesFile -Value "CLIENT_ID=qOUeZCCzSqgA93acB3LYq6lBNjgZdiOxQc-KayC3UMw"
 Add-Content -Path $codeSignToolPropertiesFile -Value "OAUTH2_ENDPOINT=https://oauth-sandbox.ssl.com/oauth2/token"
 Add-Content -Path $codeSignToolPropertiesFile -Value "CSC_API_ENDPOINT=https://cs-try.ssl.com"
