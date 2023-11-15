@@ -10,8 +10,10 @@ Write-Host "rootDir $rootDir"
 Write-Host "downloadedFile $downloadedFile"
 Write-Host "extractFolder $extractFolder"
 
-# Remove extracted folder in case (mainly used locally)
-Remove-Item -Path $extractFolder -Recurse -Force
+# Remove extracted folder if exists, just in case (mainly used locally)
+if(Test-Path $extractFolder) {
+    Remove-Item -Path $extractFolder -Recurse -Force
+}
 
 # Download (if it doesn't exist)
 if(!(Test-Path $downloadedFile -PathType Leaf)) {
