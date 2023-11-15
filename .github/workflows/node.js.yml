@@ -54,8 +54,7 @@ jobs:
     - name: Download and Extract CodeSignTool
       id: codesign
       shell: pwsh
-      run: | 
-        .\codesigntool.ps1
+      run: .\download-codesigntool.ps1
         
     - name: Install
       run: npm ci

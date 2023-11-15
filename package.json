@@ -19,11 +19,20 @@
       {
         "from": "dist",
         "to": ".",
-        "filter": ["**/*"]
+        "filter": [
+          "**/*"
+        ]
       },
       "node_modules/**/*",
       "package.json"
-    ]
+    ],
+    "win": {
+      "signingHashAlgorithms": [
+        "sha256"
+      ],
+      "target": "nsis",
+      "sign": "./sign.js"
+    }
   },
   "keywords": [],
   "author": "",
@@ -31,6 +40,7 @@
   "devDependencies": {
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
+    "dotenv": "^16.3.1",
     "electron": "^27.0.4",
     "electron-builder": "^24.6.4",
     "html-webpack-plugin": "^5.5.3",
