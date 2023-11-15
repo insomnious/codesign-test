@@ -1,6 +1,12 @@
+param (
+  [switch] $Sandbox
+)
+
 Set-StrictMode -Version 'Latest'
 $ErrorActionPreference = "Stop"
-$ProgressPreference = 'SilentlyContinue' #'Continue'
+$ProgressPreference = 'SilentlyContinue' #'Continue
+
+Write-Host "Sandbox = $Sandbox"
         
 $rootDir = Resolve-Path "."
 $downloadUrl = "https://www.ssl.com/download/codesigntool-for-windows/"
@@ -45,11 +51,13 @@ If ($folderCount -eq 1) {
 }
 
 # Set config to sandbox (only while testing)
+if($Sandbox -eq $true) {
  
-$codeSignToolPropertiesFile = Join-Path $extractFolder $configPath
+    $codeSignToolPropertiesFile = Join-Path $extractFolder $configPath
 
-$null = New-Item -Path $codeSignToolPropertiesFile -ItemType File -Force
-Add-Content -Path $codeSignToolPropertiesFile -Value "CLIENT_ID=qOUeZCCzSqgA93acB3LYq6lBNjgZdiOxQc-KayC3UMw"
-Add-Content -Path $codeSignToolPropertiesFile -Value "OAUTH2_ENDPOINT=https://oauth-sandbox.ssl.com/oauth2/token"
-Add-Content -Path $codeSignToolPropertiesFile -Value "CSC_API_ENDPOINT=https://cs-try.ssl.com"
-Add-Content -Path $codeSignToolPropertiesFile -Value "TSA_URL=http://ts.ssl.com"
+    $null = New-Item -Path $codeSignToolPropertiesFile -ItemType File -Force
+    Add-Content -Path $codeSignToolPropertiesFile -Value "CLIENT_ID=qOUeZCCzSqgA93acB3LYq6lBNjgZdiOxQc-KayC3UMw"
+    Add-Content -Path $codeSignToolPropertiesFile -Value "OAUTH2_ENDPOINT=https://oauth-sandbox.ssl.com/oauth2/token"
+    Add-Content -Path $codeSignToolPropertiesFile -Value "CSC_API_ENDPOINT=https://cs-try.ssl.com"
+    Add-Content -Path $codeSignToolPropertiesFile -Value "TSA_URL=http://ts.ssl.com"
+}
