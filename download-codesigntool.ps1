@@ -1,4 +1,5 @@
 Set-StrictMode -Version 'Latest'
+$ErrorActionPreference = "Stop"
         
 $rootDir = Resolve-Path "."
 $downloadUrl = "https://www.ssl.com/download/codesigntool-for-windows/"
@@ -31,7 +32,7 @@ $folderCount = @(Get-ChildItem $extractFolder -Directory ).Count;
 If ($folderCount -eq 1) {
 
     # get nested folder path, there is only 1 at this point
-    $nestedFolderPath = Get-ChildItem $extractFolder -Directory
+    $nestedFolderPath = (Get-ChildItem $extractFolder -Directory | Select-Object FullName)[0].FullName
 
     Write-Host "nestedFolderPath $nestedFolderPath"
 
