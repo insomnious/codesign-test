@@ -53,46 +53,9 @@ jobs:
 
     - name: Download and Extract CodeSignTool
       id: codesign
-      run: |
-        Set-StrictMode -Version 'Latest'
-        
-        $downloadUrl = "https://www.ssl.com/download/codesigntool-for-windows/"
-        $downloadedFile = "CodeSignTool.zip"
-        $extractFolder = "./CodeSignTool"
-        $configPath = "/conf/code_sign_tool.properties"
-        
-        # Download
-        Invoke-WebRequest -OutFile $downloadedFile $downloadUrl
-                
-        # Extract
-        Expand-Archive -Path "./$downloadedFile" -DestinationPath $extractFolder -Force
-          
-        # need to check for a nested single folder as 1.2.7 was packaged without this, all previous versions were not.
-        
-        $folderCount = @(Get-ChildItem $extractFolder -Directory ).Count;
-        
-        #if we have a single folder, then assume we have a nested folder that we need to fix
-        If ($folderCount -eq 1) {
-        
-            # get nested folder path, there is only 1 at this point
-            $nestedFolderPath = Join-Path $extractFolder (Get-ChildItem $extractFolder -Directory)
-        
-            # move all child items from this nested folder to it's parent
-            Get-ChildItem -Path $nestedFolderPath -Recurse | Move-Item -Destination $extractFolder
-        
-            # remove nested folder to keep it clean
-            Remove-Item -Path $nestedFolderPath -Force
-        }
-        
-        # Set config to sandbox (only while testing)
-         
-        $codeSignToolPropertiesFile = Join-Path $extractFolder $configPath
-        
-        New-Item -Path $codeSignToolPropertiesFile -ItemType File -Force
-        Add-Content -Path $codeSignToolPropertiesFile -Value "CLIENT_ID=qOUeZCCzSqgA93acB3LYq6lBNjgZdiOxQc-KayC3UMw"
-        Add-Content -Path $codeSignToolPropertiesFile -Value "OAUTH2_ENDPOINT=https://oauth-sandbox.ssl.com/oauth2/token"
-        Add-Content -Path $codeSignToolPropertiesFile -Value "CSC_API_ENDPOINT=https://cs-try.ssl.com"
-        Add-Content -Path $codeSignToolPropertiesFile -Value "TSA_URL=http://ts.ssl.com"
+      shell: pwsh
+      run: | 
+        .\codesigntool.ps1
         
     - name: Install
       run: npm ci
