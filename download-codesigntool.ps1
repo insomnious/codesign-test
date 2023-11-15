@@ -31,9 +31,9 @@ $folderCount = @(Get-ChildItem $extractFolder -Directory ).Count;
 If ($folderCount -eq 1) {
 
     # get nested folder path, there is only 1 at this point
-    $nestedFolderPath = Join-Path $extractFolder (Get-ChildItem $extractFolder -Directory)
+    $nestedFolderPath = Get-ChildItem $extractFolder -Directory
 
-    Write-Host $nestedFolderPath
+    Write-Host "nestedFolderPath $nestedFolderPath"
 
     # move all child items from this nested folder to it's parent
     Get-ChildItem -Path $nestedFolderPath -Recurse | Move-Item -Destination $extractFolder
